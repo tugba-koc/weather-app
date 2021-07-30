@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+[Netlify](https://weather-app-tugba-koc.netlify.app/)
+
+Hava Durumu Tahminlerini haftalık bazda gösteren bir uygulama geliştirildi. 
+
+Uygulamanın nasıl ayağa kaldırılacağı ile ilgili bilgiler sırası ile aşağıda verilmiştir.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
