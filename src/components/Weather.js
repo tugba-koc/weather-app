@@ -6,19 +6,16 @@ import brokenclouds from "../images/brokenclouds.png";
 import scatteredclouds from "../images/scatteredclouds.png";
 import lightrain from "../images/lightrain.png";
 import fewclouds from "../images/fewclouds.png";
+import moderaterain from "../images/moderaterain.png";
 import { usePosition } from "use-position";
 
 function Weather() {
+  const { latitude, longitude } = usePosition();
   const { city, selectedCity, setWeather, weather, setSelectedCity } =
     useCity();
-  const {
-    latitude,
-    longitude,
-    // error
-  } = usePosition();
 
-  useEffect(
-    () => {
+  useEffect(() => {
+    function getCityStart() {
       let i;
       for (i in city) {
         if (
@@ -28,12 +25,9 @@ function Weather() {
           setSelectedCity(city[i].il_adi);
         }
       }
-      console.log(city[i])
-    },
-
-    
-    [city, latitude, longitude, setSelectedCity]
-  );
+    }
+    getCityStart();
+  }, [city, latitude, longitude, setSelectedCity]);
 
   useEffect(() => {
     // secilen city ile json dosyasi eslestirildi.
@@ -84,6 +78,16 @@ function Weather() {
       case "few clouds":
         image = (
           <img className="weather-icon" src={fewclouds} alt="few clouds" />
+        );
+        break;
+
+      case "moderate rain":
+        image = (
+          <img
+            className="weather-icon"
+            src={moderaterain}
+            alt="moderate rain"
+          />
         );
         break;
 
