@@ -1,15 +1,15 @@
-import './App.css';
-import City from './components/City';
-import Weather from './components/Weather';
-import { WeatherProvider } from './context/WeatherContext';
+import "./App.css";
+import City from "./components/City";
+import Weather from "./components/Weather";
+import { WeatherProvider } from "./context/WeatherContext";
 
-function App() { 
+function App() {
   return (
     <div className="App">
-    <WeatherProvider>
-      <City/>
-      <Weather />
-    </WeatherProvider>
+      <WeatherProvider>
+        <City />
+        <Weather />
+      </WeatherProvider>
     </div>
   );
 }

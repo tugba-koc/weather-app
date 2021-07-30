@@ -6,20 +6,34 @@ import brokenclouds from "../images/brokenclouds.png";
 import scatteredclouds from "../images/scatteredclouds.png";
 import lightrain from "../images/lightrain.png";
 import fewclouds from "../images/fewclouds.png";
+import { usePosition } from "use-position";
 
 function Weather() {
-  const { city, selectedCity, setWeather, weather } = useCity();
+  const { city, selectedCity, setWeather, weather, setSelectedCity } =
+    useCity();
+  const {
+    latitude,
+    longitude,
+    // error
+  } = usePosition();
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      let x = position.coords.latitude;
-      let y = position.coords.longitude;
-      axios(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${x}&lon=${y}&units=metric&exclude=minutely&appid=ad90dc5bb9e93f4b94b3ee03adccde5f`
-      ).then((res) => setWeather(res.data.daily))
-      
-    }); 
-  }, []);
+  useEffect(
+    () => {
+      let i;
+      for (i in city) {
+        if (
+          Math.floor(city[i].lat) === Math.floor(latitude) &&
+          Math.floor(city[i].lon) === Math.floor(longitude)
+        ) {
+          setSelectedCity(city[i].il_adi);
+        }
+      }
+      console.log(city[i])
+    },
+
+    
+    [city, latitude, longitude, setSelectedCity]
+  );
 
   useEffect(() => {
     // secilen city ile json dosyasi eslestirildi.
@@ -35,6 +49,7 @@ function Weather() {
     };
     getWeather(selectedCity);
   }, [city, selectedCity, setWeather]);
+
   const DAYS = ["Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
 
   // image icin switch-case olusturuldu.
